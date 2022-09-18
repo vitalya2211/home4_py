@@ -192,7 +192,7 @@ try:
         cripto=file3.read()
     with open('файл1.txt','w') as file3:
         file3.write(rle_decode(cripto))
-    turtle_run=input('запустить черепашку?y/n -> ')
+    turtle_run=input('запустить черепашку? y/n -> ')
     if turtle_run=='y':
         target=turtle()
     else: print('by))')
