@@ -1,5 +1,44 @@
 import random
+import turtle as t
+def turtle():
+    t.shape('turtle')
+    t.shapesize(2)
+    t.color('black','blue')
+    t.speed(200)
+    t.begin_fill()
 
+    for step in range(60):
+        t.forward(6)
+        t.right(6)
+    t.end_fill()
+   
+def rle_encode(data):
+   encoding = ''
+   prev_char = ''
+   count = 1
+   if not data: 
+       return ''
+   for char in data:
+      if char != prev_char:
+          if prev_char:
+             encoding += str(count) + prev_char
+          count = 1 
+          prev_char = char 
+      else:
+          count += 1
+   else:
+         encoding += str(count) + prev_char
+   return encoding
+def rle_decode(data):
+   decode = ''
+   count = '' 
+   for char in data: 
+      if char.isdigit(): 
+         count += char
+      else:
+          decode += char * int(count)
+          count = '' 
+   return decode
 def sieve(num:int)->set:
     """решето Эратосфена до заданного числа"""
     result = []
@@ -139,10 +178,25 @@ try:
     print(string)
 
 
-#5 - Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных. Входные и выходные данные хранятся в отдельных текстовых файлах.
+#5 - Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных. 
+#Входные и выходные данные хранятся в отдельных текстовых файлах.
 #файл первый:
 #AAAAAAAAAAAABBBBBBBBBBBCCCCCCCCCCDDDDDDEEEEEFFFFG python is sooooooo coooooool
 #файл второй:
 #сжатый текст.
+    val=rle_encode('AAAAAAAAAAAABBBBBBBBBBBCCCCCCCCCCDDDDDDEEEEEFFFFG python is sooooooo coooooool')
+    with open('файл2.txt','w') as file3:
+        file3.write(val)
+    #print(val)
+    with open('файл2.txt','r') as file3:
+        cripto=file3.read()
+    with open('файл1.txt','w') as file3:
+        file3.write(rle_decode(cripto))
+    turtle_run=input('запустить черепашку?y/n -> ')
+    if turtle_run=='y':
+        target=turtle()
+    else: print('by))')
+
+
 except ValueError:
     print(EOFError)
